@@ -1,0 +1,8 @@
+[package]
+name = "plamo"
+version = "0.1.0"
+authors = ["Shogo Otake <shogo.otake@gmail.com>"]
+edition = "2018"
+
+[build-dependencies]
+bindgen = "0.43.1"
