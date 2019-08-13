@@ -2,6 +2,12 @@
 name = "plamo"
 version = "0.1.0"
 authors = ["Shogo Otake <shogo.otake@gmail.com>"]
+license = "MIT"
+description = "libplamo wrapper for Rust"
+repository = "https://github.com/plamo/plamo-rust"
+readme = "README.md"
+keywords = ["Plamo"]
+categories = ["web-programming"]
 edition = "2018"
 
 [build-dependencies]
