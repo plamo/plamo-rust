@@ -9,6 +9,3 @@ readme = "README.md"
 keywords = ["Plamo"]
 categories = ["web-programming"]
 edition = "2018"
-
-[build-dependencies]
-bindgen = "0.43.1"
