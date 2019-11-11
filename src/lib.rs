@@ -207,6 +207,24 @@ extern "C" {
 
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
+pub struct PlamoFormUrlencoded {
+    _unused: [u8; 0],
+}
+
+extern "C" {
+    pub fn plamo_form_urlencoded_new(plamo_request: *const PlamoRequest) -> *mut PlamoFormUrlencoded;
+    pub fn plamo_form_urlencoded_destroy(plamo_form_urlencoded: *mut PlamoFormUrlencoded);
+    pub fn plamo_form_urlencoded_for_each(
+        plamo_form_urlencoded: *const PlamoFormUrlencoded,
+        callback: Option<
+            unsafe extern "C" fn(arg1: *const c_char, arg2: *const c_char),
+        >
+    );
+    pub fn plamo_form_urlencoded_get(plamo_form_urlencoded: *mut PlamoFormUrlencoded, key: *const c_char) -> *mut PlamoStringArray;
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
 pub struct PlamoMiddleware {
     pub config: *const c_void,
     pub callback: Option<
