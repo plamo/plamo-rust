@@ -119,6 +119,12 @@ pub struct PlamoHttpQuery {
 extern "C" {
     pub fn plamo_http_query_new() -> *mut PlamoHttpQuery;
     pub fn plamo_http_query_destroy(plamo_http_query: *mut PlamoHttpQuery);
+    pub fn plamo_http_query_for_each(
+        plamo_http_query: *mut PlamoHttpQuery,
+        callback: Option<
+            unsafe extern "C" fn(arg1: *const c_char, arg2: *const c_char),
+        >,
+    );
     pub fn plamo_http_query_get(
         plamo_http_query: *mut PlamoHttpQuery,
         key: *const c_char,
