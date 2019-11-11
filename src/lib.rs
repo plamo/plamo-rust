@@ -37,6 +37,7 @@ pub struct PlamoStringArray {
 extern "C" {
     pub fn plamo_string_array_new() -> *mut PlamoStringArray;
     pub fn plamo_string_array_destroy(plamo_string_array: *mut PlamoStringArray);
+    pub fn plamo_string_array_length(plamo_string_array: *const PlamoStringArray) -> usize;
     pub fn plamo_string_array_for_each(
         plamo_string_array: *const PlamoStringArray,
         callback: Option<unsafe extern "C" fn(arg1: *const c_char)>,
