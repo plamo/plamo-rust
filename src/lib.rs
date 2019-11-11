@@ -92,7 +92,7 @@ extern "C" {
     pub fn plamo_http_header_for_each(
         plamo_http_header: *mut PlamoHttpHeader,
         callback: Option<
-            unsafe extern "C" fn(arg1: *const c_char, arg2: *mut PlamoStringArray),
+            unsafe extern "C" fn(arg1: *const c_char, arg2: *const c_char),
         >,
     );
     pub fn plamo_http_header_get(
