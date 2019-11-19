@@ -220,7 +220,64 @@ extern "C" {
             unsafe extern "C" fn(arg1: *const c_char, arg2: *const c_char),
         >
     );
-    pub fn plamo_form_urlencoded_get(plamo_form_urlencoded: *mut PlamoFormUrlencoded, key: *const c_char) -> *mut PlamoStringArray;
+    pub fn plamo_form_urlencoded_get(plamo_form_urlencoded: *const PlamoFormUrlencoded, key: *const c_char) -> *const PlamoStringArray;
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct PlamoFormDataFile {
+    _unused: [u8; 0],
+}
+
+extern "C" {
+    pub fn plamo_form_data_file_get_content_type(plamo_form_data_file: *const PlamoFormDataFile) -> *const c_char;
+    pub fn plamo_form_data_file_get_file_name(plamo_form_data_file: *const PlamoFormDataFile) -> *const c_char;
+    pub fn plamo_form_data_file_get_body(plamo_form_data_file: *const PlamoFormDataFile) -> *const c_uchar;
+    pub fn plamo_form_data_file_get_body_size(plamo_form_data_file: *const PlamoFormDataFile) -> usize;
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct PlamoFormDataField {
+    pub text: *mut PlamoString,
+    pub file: *mut PlamoFormDataFile,
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct PlamoFormDataFieldArray {
+    _unused: [u8; 0],
+}
+
+extern "C" {
+    pub fn plamo_form_data_field_array_length(plamo_form_data_field_array: *const PlamoFormDataFieldArray) -> usize;
+    pub fn plamo_form_data_field_array_for_each(
+        plamo_form_data_field_array: *const PlamoFormDataFieldArray,
+        callback: Option<
+            unsafe extern "C" fn(*const PlamoFormDataField),
+        >
+    );
+    pub fn plamo_form_data_field_array_get_at(plamo_form_data_field_array: *const PlamoFormDataFieldArray, index: usize) -> *const PlamoFormDataField;
+    pub fn plamo_form_data_field_array_get_first(plamo_form_data_field_array: *const PlamoFormDataFieldArray) -> *const PlamoFormDataField;
+    pub fn plamo_form_data_field_array_get_last(plamo_form_data_field_array: *const PlamoFormDataFieldArray) -> *const PlamoFormDataField;
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct PlamoFormData {
+    _unused: [u8; 0],
+}
+
+extern "C" {
+    pub fn plamo_form_data_new(plamo_request: *const PlamoRequest) -> *mut PlamoFormData;
+    pub fn plamo_form_data_destroy(plamo_form_data: *mut PlamoFormData);
+    pub fn plamo_form_data_for_each(
+        plamo_form_data: *const PlamoFormData,
+        callback: Option<
+            unsafe extern "C" fn(arg1: *const c_char, arg2: *const PlamoFormDataField),
+        >
+    );
+    pub fn plamo_form_data_get(plamo_form_data: *const PlamoFormData, key: *const c_char) -> *const PlamoFormDataFieldArray;
 }
 
 #[repr(C)]
